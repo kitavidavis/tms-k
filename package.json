@@ -19,6 +19,7 @@
     "@mantine/ds": "^5.3.3",
     "@mantine/hooks": "^5.5.4",
     "@mantine/next": "^5.3.3",
+    "@mantine/prism": "^5.6.3",
     "@mantine/spotlight": "^5.3.3",
     "@mantine/styles": "^5.3.3",
     "@mui/material": "^5.0.6",
