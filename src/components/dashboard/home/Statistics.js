@@ -42,7 +42,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 
-export default function Statistics() {
+export default function Statistics({complains, tenants}) {
   const { classes } = useStyles();
   const { state, dispatch } = useContext(AuthContext);
   const [houses, setHouses] = useState([]);
@@ -72,14 +72,14 @@ export default function Statistics() {
     {
       "title": "Complains",
       "icon": IconTool,
-      "value": "0",
-      "diff": 0
+      "value": complains,
+      "diff": complains
     },
     {
       "title": "New Tenants",
       "icon": IconUserPlus,
-      "value": "0",
-      "diff": 0
+      "value": tenants,
+      "diff": tenants
     }
   ]
 

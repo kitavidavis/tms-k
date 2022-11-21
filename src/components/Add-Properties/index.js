@@ -67,13 +67,6 @@ function AddProperty() {
     <Paper shadow="sm" p="md">
         <TextInput value={name} onChange={(e) => {setName(e.currentTarget.value)}} label="Name of flat" description="A flat name may be derived from the name of the location where the flat resides" required />
         <NumberInput value={rooms} onChange={(val) => {setRooms(val)}} label="Number of rooms" description="Each room represents a unit." mt="md" required />
-        <Text size="xs" mt="md" color="dimmed">Additional parameters</Text>
-        <Switch checked={water} onChange={(e) => {setWater(e.currentTarget.checked)}} label="Water" description="Does tenants pay for water?" mt="md" />
-        {water ? <NumberInput value={watercost} onChange={(val) => {setWaterCost(val)}} label="Water Cost" description="Cost to be incurred by tenant per month" mt="md" required /> : null}
-        <Switch checked={garbage} onChange={(e) => {setGarbage(e.currentTarget.checked)}} label="Garbage" description="Does tenants pay for garbage?" mt="md" />
-        {garbage ? <NumberInput value={garbageCost} onChange={(val) => {setGarbageCost(val)}} label="Garbage Cost" description="Cost to be incurred by tenant per month" mt="md" required/> : null}
-        <NumberInput value={rent} onChange={(val) => {setRent(val)}} label="Rent" description="Per month" mt="md" />
-
         <Button onClick={() => {saveDetails()}} mt="md" >Save Details</Button>
     </Paper>
     </>

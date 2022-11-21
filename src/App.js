@@ -38,6 +38,9 @@ import { TenantLayout } from './components/tenants/layout/layout';
 import TenantPage from './components/tenants/homepage/homepage';
 import PaymentsList from './components/payments-list';
 import AddUnit from './components/add-units';
+import TenantDashboard from './components/tenant/dashboard';
+import AppTenantLayout from './components/tenant/layout/layout';
+import CreateComplain from './components/complains/create';
 
 const THEME_KEY = 'tms-color-scheme';
 
@@ -154,25 +157,17 @@ const LoaderPage = () => {
 
   const AuthPage = () => {
     return (
-      <Navigate to={"/app/"} />
-    )
-  }
-
-  const TenantAuthPage = () => {
-    return (
-      <Navigate to="/tenant/app" />
+      state.userData.role === "user" ? (
+        <Navigate to={"/app/"} />
+      ) : (
+        <Navigate to={"/tenant/"} />
+      )
     )
   }
 
   const UnauthPage = () => {
     return (
       <Navigate to={"/account/login"} />
-    )
-  }
-
-  const TenantUnauthPage = () => {
-    return (
-      <Navigate to="/tenant/account/login" />
     )
   }
 
@@ -208,18 +203,20 @@ const LoaderPage = () => {
     {state.isLoading ? (
       <LoaderPage />
     ) : (
-      <BrowserRouter>
+
+        <BrowserRouter>
         <Routes>
-          
-          <Route path='/' element={state.userToken === null ? <Layout noFooter /> : <AuthPage />} >
+        <Route path='/' element={state.userToken === null ? <Layout noFooter /> : <AuthPage />} >
             <Route index element={<LandingPage />} />
             <Route path='*' element={<NotFound />} />
             <Route path="/account/login" element={<LoginPage />} />
             <Route path='/account/register' element={<SignUp />} />
             <Route path='/account/forgot-password' element={<ForgotPasswordPage /> } />
           </Route>
-          <Route path='/tenant/' element={state.userToken === null ? <TenantLayout /> : <TenantLayout />}>
-            <Route index element={<TenantPage />} />
+          <Route path='/tenant/' element={state.userToken === null ? <UnauthPage /> : <AppTenantLayout />}>
+          <Route index element={<TenantDashboard />} />
+          <Route path='/tenant/complains/' element={<CreateComplain />} />
+          <Route path='/tenant/settings' element={<Settings />} />
           </Route>
           <Route path='/app/' element={state.userToken === null ? <UnauthPage /> : <AppLayout />}>
             <Route index element={<HomePage />} />

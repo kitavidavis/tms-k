@@ -17,8 +17,6 @@ export function Header() {
           </Center>
         </Link>
         <Group  >
-            <Link to="/tenant/" style={{color: 'white', textDecoration: 'none' }}>Tenants</Link>
-            <Link to="/staff/" style={{color: 'white', textDecoration: 'none' }}>Staff</Link>
             <Button color="white" component={Link} to='/account/login' leftIcon={<UserCircle />}>Login</Button>
             <Group style={{display: width < 390 ? "none" : "block"}} >
             <Button component={Link}  to="/account/register" leftIcon={<UserCircle />} >Sign Up</Button>

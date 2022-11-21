@@ -1,9 +1,12 @@
-import { ColorSwatch, Text, Group, Paper, SimpleGrid, Anchor, Title as MantineTitle, useMantineColorScheme, useMantineTheme, ActionIcon, TextInput, NumberInput, Switch, Button, Tooltip, Table, Center, Input, Select, Box, List} from '@mantine/core';
+import { ColorSwatch, Text, Group, Paper, SimpleGrid, Anchor, Title as MantineTitle, useMantineColorScheme, useMantineTheme, ActionIcon, TextInput, NumberInput, Switch, Button, Tooltip, Table, Center, Input, Select, Box, List, Loader, Menu, Badge} from '@mantine/core';
 import { BreadcrumbsSlash } from "../BreadCrumbs/";
 import { AuthContext } from '../../App';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import { IconFileExport, IconPlus } from "@tabler/icons"
+import toast from 'react-hot-toast';
+import axios from '../../utils/axios';
+import { Dots } from 'tabler-icons-react';
 
 function Complains() {
   const theme2 = useMantineColorScheme();
@@ -16,6 +19,30 @@ function Complains() {
       {item.title}
     </Anchor>
   ));
+
+  const [ready, setReady] = useState(false);
+  const [complains, setComplains] = useState([]);
+
+  useEffect(() => {
+    try{
+      axios.post("/complains/getcomplains", {
+        username: state.userData.username
+      }).then(function(res){
+        if(res.status === 200){
+          setComplains(res.data.data);
+          console.log(res.data.data);
+        }
+
+        setReady(true);
+      }).catch(function(error){
+        toast.error("Sorry!Something wrong happened!");
+        setReady(true);
+      })
+    } catch(error){
+      toast.error("Sorry!Something wrong happened");
+      setReady(true);
+    }
+  }, []);
 
   const theme = useMantineTheme()
 
@@ -40,10 +67,13 @@ function Complains() {
                     #
                 </th>
                 <th>
-                    Title
+                    House
                 </th>
                 <th>
                     Description
+                </th>
+                <th>
+                  Status
                 </th>
                 <th>
                     Action
@@ -51,13 +81,53 @@ function Complains() {
             </tr>
         </thead>
         <tbody>
+        {ready ? (
+          complains.length === 0 ? (
             <tr>
+            <td colSpan={7}>
+                <Center>
+                    <Text size="xs">No data is available</Text>
+                </Center>
+            </td>
+        </tr>
+          ) : (
+            complains.map((item, index) => {
+              return (
+                <tr key={`complain-row-${index}`} >
+                  <td>
+                    {index + 1}
+                  </td>
+                  <td>
+                    {item.house}
+                  </td>
+                  <td>
+                    {item.description}
+                  </td>
+                  <td>
+                    <Badge>{item.status}</Badge>
+                  </td>
+                  <td>
+                    <Menu>
+                      <Menu.Target>
+                        <ActionIcon size="xs">
+                          <Dots />
+                        </ActionIcon>
+                      </Menu.Target>
+                    </Menu>
+                  </td>
+                </tr>
+              )
+            })
+          )
+        ) : (
+                      <tr>
                 <td colSpan={7}>
                     <Center>
-                        <Text size="xs">No data is available</Text>
+                        <Loader variant='bars' size="xs" />
                     </Center>
                 </td>
             </tr>
+        )}
         </tbody>
     </Table>
     </div>
