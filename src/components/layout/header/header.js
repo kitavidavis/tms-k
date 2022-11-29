@@ -11,11 +11,9 @@ export function Header() {
   return (
     <div className={classes.header}>
       <Container size="xl" px="md" className={classes.inner}>
-        <Link href="/" style={{textDecoration: "none"}} >
           <Center sx={(theme) => theme.fn.focusStyles()}>
-            <Title color="white" weight={300} order={3} >TMS</Title>
+            <Title order={3} >TMS®</Title>
           </Center>
-        </Link>
         <Group  >
             <Button color="white" component={Link} to='/account/login' leftIcon={<UserCircle />}>Login</Button>
             <Group style={{display: width < 390 ? "none" : "block"}} >

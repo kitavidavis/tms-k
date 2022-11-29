@@ -41,6 +41,11 @@ import AddUnit from './components/add-units';
 import TenantDashboard from './components/tenant/dashboard';
 import AppTenantLayout from './components/tenant/layout/layout';
 import CreateComplain from './components/complains/create';
+import AppEmployeeLayout from './components/employees/layout/layout';
+import EmployeeDashboard from './components/employees/dashboard';
+import EmployeesHouse from './components/employees/houses';
+import EmployeesTask from './components/employees/tasks';
+import EmployeesComplains from './components/employees/complains';
 
 const THEME_KEY = 'tms-color-scheme';
 
@@ -159,8 +164,10 @@ const LoaderPage = () => {
     return (
       state.userData.role === "user" ? (
         <Navigate to={"/app/"} />
-      ) : (
+      ) : state.userData.role === "tenant" ? (
         <Navigate to={"/tenant/"} />
+      ) : (
+        <Navigate to="/employee/" />
       )
     )
   }
@@ -212,6 +219,13 @@ const LoaderPage = () => {
             <Route path="/account/login" element={<LoginPage />} />
             <Route path='/account/register' element={<SignUp />} />
             <Route path='/account/forgot-password' element={<ForgotPasswordPage /> } />
+          </Route>
+          <Route path='/employee/' element={state.userToken === null ? <UnauthPage /> : <AppEmployeeLayout />}>
+            <Route index element={<EmployeeDashboard />} />
+            <Route path='/employee/houses' element={<EmployeesHouse />} />
+            <Route path='/employee/tasks' element={<EmployeesTask />} />
+            <Route path='/employee/complains' element={<EmployeesComplains />} />
+            <Route path='/employee/settings' element={<Settings />} />
           </Route>
           <Route path='/tenant/' element={state.userToken === null ? <UnauthPage /> : <AppTenantLayout />}>
           <Route index element={<TenantDashboard />} />

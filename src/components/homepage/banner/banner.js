@@ -47,7 +47,7 @@ export function Banner() {
           </Title>
 
           <Text className={classes.description}>
-            Managing complex real-estate properties can a great challenge. Automate tasks and enhance efficient workflows
+            Managing complex real-estate properties can be a great challenge. Automate tasks and enhance efficient workflows
             by integreting core tools that simplify real-estate operations.
           </Text>
 

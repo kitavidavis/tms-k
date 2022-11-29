@@ -1,4 +1,4 @@
-import { createStyles, Card, Group, Switch, Text } from '@mantine/core';
+import { createStyles, Card, Group, Switch, Text, Button } from '@mantine/core';
 import { useContext } from 'react';
 import { AuthContext } from '../../App';
 import { ACCOUNT_DATA } from '../../constants';
@@ -71,8 +71,8 @@ export default function Settings() {
             Destroy all your sessions. 
         </Text>
       </div>
-      <Switch onClick={() => {logout()}} offLabel="ON" className={classes.switch} size="lg" />
-    </Group>
+      <Button color="red" variant='subtle' onClick={() => {logout()}}  >Logout</Button>
+        </Group>
 
     </Card>
   );

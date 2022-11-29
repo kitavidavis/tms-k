@@ -39,7 +39,7 @@ export default createStyles((theme) => ({
 
   body: {
     flex: '0 0 700px',
-    paddingTop: 100,
+    paddingTop: 50,
     position: 'relative',
     zIndex: 1,
   },

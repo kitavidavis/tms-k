@@ -50,6 +50,21 @@ const Register = () => {
 }, [checked, checked2, checked3, checked4])
   
   const submitDetails = async () => {
+    if(email === ""){
+      toast.error("Email is required!");
+      return false;
+    }
+
+    if(password === ""){
+      toast.error("Password is required");
+      return false;
+    }
+
+    if(phonenumber === ""){
+      toast.error("Phone number is required");
+      return false;
+    }
+
     try {
       const body = {
         username: email,
@@ -89,7 +104,7 @@ const Register = () => {
       setChecked3(false);
       setChecked4(false);
       }} sx={(theme) => ({backgroundColor: checked ? theme.fn.variant({ variant: 'light' }).background : "transparent", cursor: "pointer"})} mb={10} withBorder p="md">
-      <Radio onChange={() => {}} checked={checked} label="Admin user" />
+      <Radio onChange={() => {}} checked={checked} label="House owner user" />
       <Text color="dimmed" size="sm">Account owner that performs core tasks without restrictions</Text>
     </Paper>
     <Paper onClick={() => {
@@ -127,7 +142,6 @@ const Register = () => {
       <TextInput value={email} onChange={(e) => {setEmail(e.currentTarget.value)}} label={checked ? "Admin user email address" : checked2 ?  "Tenant user email address" : checked3 ? "Employee user email address" : "Fundi user email address"} required />
       <TextInput value={phonenumber} onChange={(e) => {setPhonenumber(e.currentTarget.value)}} label="Phone Number" placeholder="" mt="md" required />
     <PasswordInput value={password} onChange={(e) => {setPassword(e.currentTarget.value)}} label="Password" required mt="md" />
-    <Checkbox label="I agree to terms and conditions" required mt="md" />
     <Button mb={20} fullWidth onClick={() => {submitDetails()}} mt="lg">Register Account</Button>
       </>
     )}

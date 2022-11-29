@@ -9,7 +9,7 @@ export function Layout({noHeader = false, noFooter=false}) {
   return (
   <>
     {!noHeader && !location.pathname.includes("account") ? <Header  /> : null}
-    <main style={{ paddingTop: !noHeader && !location.pathname.includes("account") ? HEADER_HEIGHT : 0 }}><Outlet /></main>
+    <main style={{ paddingTop: 0 }}><Outlet /></main>
     <Toaster />
 
     </>
