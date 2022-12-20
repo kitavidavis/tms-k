@@ -13,7 +13,7 @@ export default function getQuery(queryStr = '') {
 
     return queryObj
   } else {
-    console.warn('Query string is not defined')
+    console.warn('Query string is not defined');
     return {}
   }
 }
